@@ -9,6 +9,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('home', { url: '/', templateUrl: '/partials/home/home.html', controller: 'homeCtrl' })
     .state('register', { url: '/register', templateUrl: '/partials/register.html', controller: 'registerCtrl' })
     .state('login', { url: '/login', templateUrl: '/partials/login.html', controller: 'loginCtrl' })
+    .state('profile', { url: '/profile', templateUrl: '/partials/profile.html', controller: 'profileCtrl' })
   $urlRouterProvider.otherwise('/');
 });
 
@@ -36,17 +37,43 @@ app.controller('registerCtrl', function($scope, Users) {
     Users.register($scope.user)
     .then(function(res){
       console.log('registration succeeded');
+      //window.location.href = '/partials/login.html';
+
     });
   }
 });
 
-app.controller('loginCtrl', function($scope, Users) {
+app.controller('loginCtrl', function($scope, $state, $location, Users) {
+  console.log('inside loginCtrl');
   $scope.loginUser = function(){
+    console.log('inside login ctrl');
     Users.login($scope.user)
     .then(function(res){
+
+      // console.console.log('userObj', userObj);
       console.log('login succeeded');
+      console.log(res);
+      // $state.go('./partials/profile');
+      $location.path('/profile');
+      // $location.path('/profile');
+      //href to $state profile after .then
     });
   }
+});
+app.controller('profileCtrl', function($scope, Users) {
+  console.log('inside profileCtrl');
+  // $scope.loginUser = function(){
+  //   console.log('inside login ctrl');
+  //   Users.login($scope.user)
+  //   .then(function(res){
+  //
+  //     // console.console.log('userObj', userObj);
+  //     console.log('login succeeded');
+  //     console.log(res);
+  //     $state.go('/profile');
+  //     //href to $state profile after .then
+  //   });
+  // }
 });
 
 app.service('Users', function($http) {

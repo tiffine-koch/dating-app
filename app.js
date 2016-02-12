@@ -10,18 +10,18 @@ var users = require('./routes/users');
 
 var app = express();
 
-// var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/datingApp'
-// var mongoose = require('mongoose');
-// mongoose.connect(mongoUrl, function(err) {
-//   console.log(err || `Connected to MongoDB: ${mongoUrl}`);
-// });
+var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/datingApp'
+var mongoose = require('mongoose');
+mongoose.connect(mongoUrl, function(err) {
+  console.log(err || `Connected to MongoDB: ${mongoUrl}`);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
