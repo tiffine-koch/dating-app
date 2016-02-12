@@ -2,12 +2,18 @@
 
 var express = require('express');
 var router = express.Router();
-
 var Test = require('../models/test');
 
+router.post('/register', function(req, res, next) {
+  console.log('inside register in server.js');
+  console.log('req.body: ', req.body);
+  res.render('index');
+});
 
-router.post('/', function(req, res, next) {
-  console.log('successful post in server.js');
+router.post('/login', function(req, res, next) {
+  console.log('inside login in server.js');
+  console.log('req.body: ', req.body);
+  res.render('index');
 });
 
 router.get('/', function(req, res) {
