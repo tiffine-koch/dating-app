@@ -4,6 +4,12 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var rimraf = require('rimraf');
+// var uglify = require('gulp-uglify'); //have to do an array syntax on code
+// var ngAnnotate = require('gulp-ng-annotate'); //automatically adds all of the angular annotations
+// var gutil = require('gulp-util'); //gulp utility tool - catch errors
+// var plumber = require('gulp-plumber'); //takes care of leaks - univesal error catcher
+
+//var sourcemaps = require('gulp-sourcemaps');
 
 var config = {
   paths: {
@@ -33,7 +39,12 @@ gulp.task('clean-html', function(cb) {
 
 gulp.task('js', ['clean-js'], function() {
   return gulp.src(config.paths.js)
+    // .pipe(sourcemaps.init())
+    // .pipe(plumber())
+    // .pipe(ngAnnotate())
     .pipe(concat('bundle.js'))
+    // .pipe(uglify())
+    // .pipe(source.write('../maps'));
     .pipe(gulp.dest('./public/js'));
 });
 

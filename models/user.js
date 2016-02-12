@@ -8,10 +8,12 @@ var userSchema = new mongoose.Schema({
   firebaseId: {type:String},
   email:{type:String},
   gender:{type:String},
+  preference:{type:String},
   username:{type:String},
   ageRange: {type:String},
   hobbies: {type:String},
   favFood: {type:String},
+  bio: {type:String},
   imagesArray:[{type: mongoose.Schema.Types.ObjectId, ref: "Image"}]
 });
 

@@ -26,9 +26,10 @@ router.post('/register', function(req, res, next) {
     var userObj = {};
     userObj.firebaseId = userData.uid;
     userObj.email = req.body.email;
-    userObj.gender = 'female';
-    // userObj.gender = req.body.gender;
+    userObj.gender = req.body.gender;
+    // userObj.bio = req.body.bio;
     // userObj.username = req.body.username;
+    // userObj.preference = req.body.preference;
     // // userObj.ageRange = req.body.ageRange;
     // userObj.hobbies = req.body.hobbies;
     // userObj.favFood = req.body.favFood;
@@ -66,6 +67,7 @@ router.post('/login', function(req, res, next) {
       // res.data = userObj;
       // res.data('mytoken', token).send();
       res.cookie('mytoken', token).send(userObj);
+      // res.send({token: token})
     });
   });
 });

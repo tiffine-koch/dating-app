@@ -1,24 +1,28 @@
-<table>
-  <th>
+<!-- <table class="table">
+  <thead>
     My Profile
-  </th>
   <tr>
     <td>
-      Image
+      <img src="http://www.library.yorku.ca/web/bbl/wp-content/uploads/sites/8/2014/07/placeholder.png" alt="" width="300px" height="300px">
     <br>
       image1 image2 image3
     </td>
     <td>
       <tr>
         <br>
-        username
+        <input type="text" id="usernameInput" ng-model="user.username">username
       </tr>
+  </thead>
+      <br>
       <tr>
-        brief bio
+        <textarea width="200px" height="200px" type="text" id="bioInput" ng-model="user.bio">brief bio</textarea>
         <br>
-        blah
-        blah
-        blah
+        <select >
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="opel">Opel</option>
+          <option value="audi">Audi</option>
+        </select>
       </tr>
     </td>
   </tr>
@@ -31,8 +35,84 @@
       Match
     </td>
   </tr>
-</table>
+</table> -->
 
+<table class="table">
+  <thead>
+    <tr>
+      My Profile
+    </tr>
+    <br>
+    <tr>
+      <img src="http://www.library.yorku.ca/web/bbl/wp-content/uploads/sites/8/2014/07/placeholder.png" alt="" width="300px" height="300px">
+    </tr>
+    <br>
+    <tr>
+      <input type="text" id="usernameInput" ng-model="user.username" placeholder="What do they call you?">Enter Profile Name
+    </tr>
+    <br>
+    <tr>
+      <textarea width="600px" height="400px" type="text" id="bioInput" ng-model="user.bio" placeholder="Tell us about yourself! Great bios catch great potential matches!"></textarea>
+    </tr>
+    <br>
+  </thead>
+  <tbody>
+    <thead>
+      <tr>
+        <th>Gender</th>
+        <th>Preferences</th>
+        <th>Age Range</th>
+        <th>Hobbies</th>
+        <th>Fav Foods</th>
+      </tr>
+    </thead>
+    <tr>
+      <td>
+        <!-- <select ng-model="user.gender" ng-options="user in user.gender user in users" > -->
+        <select ng-model="user.gender" >
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+          <option value="undisclosed">Prefer Not to Disclose</option>
+        </select>
+      </td>
+      <td>
+        <select ng-model="user.preference">
+          <option value="men">Seeking Men</option>
+          <option value="women">Seeking Women</option>
+          <option value="either">Seeking Either</option>
+        </select>
+      </td>
+      <td>
+        <select ng-model="user.ageRange">
+          <option value="18-25">18-25</option>
+          <option value="26-40">26-40</option>
+          <option value="41-54">41-54</option>
+          <option value="55+">55+</option>
+        </select>
+      </td>
+      <td>
+        <select ng-model="user.hobbies">
+          <option value="outdoor">Outdoorsy Things</option>
+          <option value="party"> Party Scene</option>
+          <option value="music">Music Scene</option>
+          <option value="art">Arts Scene</option>
+        </select>
+      </td>
+      <td>
+        <select ng-model="user.favFood">
+          <option value="japanese">Japanese</option>
+          <option value="mexican">Mexican</option>
+          <option value="american">American</option>
+          <option value="thai">Thai</option>
+        </select>
+      </td>
+      <td>
+        <button type="button" class="btn btn-success" ng-click="saveUserData()" value="Submit">Update My Profile</button>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
 
 <!--
 <form action="">

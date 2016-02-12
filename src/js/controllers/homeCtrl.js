@@ -55,16 +55,24 @@ app.controller('loginCtrl', function($scope, $state, $location, Users) {
       console.log(res);
       // $state.go('./partials/profile');
       $location.path('/profile');
+      console.log('page sent to profile');
       // $location.path('/profile');
       //href to $state profile after .then
     });
   }
 });
-app.controller('profileCtrl', function($scope, Users) {
+app.controller('profileCtrl', function($scope, $state, Users) {
   console.log('inside profileCtrl');
+  $scope.saveUserData = function() {
+    console.log('inside save function');
+    console.log('$scope.user.username', $scope.user.username);
+    console.log('$scope.user.bio', $scope.user.bio);
+    console.log('$scope.user.gender', $scope.user.gender);
+    console.log('$scope.user', $scope.user);
+  };
   // $scope.loginUser = function(){
   //   console.log('inside login ctrl');
-  //   Users.login($scope.user)
+  //   Users.login($scobio
   //   .then(function(res){
   //
   //     // console.console.log('userObj', userObj);
