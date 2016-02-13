@@ -5,6 +5,7 @@ var router = express.Router();
 var Firebase = require('firebase');
 var ref = new Firebase('https://dating-appch.firebaseio.com/');
 var User = require('../models/user');
+var Match = require('../models/match');
 
 // TEST
 var Test = require('../models/test');
@@ -110,9 +111,48 @@ router.get('/getdata', authMiddleWare, function(req, res) {
       res.send(userObj);
   });
 });
+
 router.get('/getallusers', authMiddleWare, function(req, res) {
   User.find({}, function(err, usersArray){
       res.send(usersArray);
+  });
+});
+
+router.post('/creatematch', authMiddleWare, function(req, res) {
+  Match.find({receiverId: req.user._id}, function(err, matches) {
+    if(matches.length === 0) {
+      var match = {
+        senderId: req.user._id,
+        receiverId: req.body._id,
+        status: 'Proposed'
+      };
+      console.log('req.body', req.body);
+
+      Match.create(match, function(err, match) {
+        console.log('match', match);
+        res.status(err ? 400 : 200).send(err || match);
+      });
+    } else {
+      console.log('matches', matches);
+      for(var i = 0; i < matches.length; i++) {
+        console.log('inside for loop');
+        if(matches[i].senderId == req.body._id) {
+          console.log('hey now');
+          Match.update({_id: matches[i]._id}, {status: 'Accepted'}, function(err, data) {
+            console.log('err-matches', err);
+            console.log('data-matches', data);
+          });
+          console.log('matches', matches);
+        }
+      }
+    }
+    console.log('err', err);
+  });
+});
+
+router.put('/accept/:id', function(req, res, next) {
+  Match.accept(req.params.id, function(err, match) {
+    res.status(err ? 400 : 200).send(err || match);
   });
 });
 

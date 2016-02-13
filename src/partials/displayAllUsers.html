@@ -2,7 +2,7 @@
 <table class="table">
 <thead>
   <tr>
-    <th>username!!!</th>
+    <th>Name</th>
     <th>Bio</th>
     <th>Gender</th>
     <th>Preferences</th>
@@ -10,6 +10,7 @@
     <th>Hobbies</th>
     <th>Fav Foods</th>
     <th>Photo</th>
+    <th>Select Profile</th>
   </tr>
 </thead>
 
@@ -23,6 +24,9 @@
     <td>{{user.hobbies}}</td>
     <td>{{user.favFood}}</td>
     <td>{{user.image}}</td>
+    <td>
+      <button type="button" ng-click="sendMatchRequest(user, $index)" class="btn btn-danger btn-success add-button" value="Submit">Click to Like</button>
+    </td>
   </tr>
 </tbody>
 </table>

@@ -69,7 +69,18 @@ app.controller('displayAllCtrl', function($scope, $state, Users) {
         console.log('res', res.data);
         $scope.usersArray = res.data;
   });
-  //
+    $scope.sendMatchRequest = function(user, index) {
+       console.log('inside function');
+       console.log('user', user);
+       console.log('index', index);
+
+       Users.createMatch(user)
+        .then(function(res) {
+          console.log('inside function');
+
+        });
+
+    };
   // $scope.saveUserData = function() {
   //   Users.saveData($scope.user).then(function(res){
   //   });
@@ -102,5 +113,9 @@ app.service('Users', function($http) {
   this.getAllUsers = function() {
     console.log('inside get data, getting all users');
     return $http.get('/getallusers');
+  }
+  this.createMatch = function(userObj){
+    console.log('inside createMatch', userObj);
+    return $http.post('/creatematch', userObj);
   }
 });
