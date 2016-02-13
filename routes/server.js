@@ -7,22 +7,11 @@ var ref = new Firebase('https://dating-appch.firebaseio.com/');
 var User = require('../models/user');
 var Match = require('../models/match');
 
-// TEST
-var Test = require('../models/test');
-
 router.post('/register', function(req, res, next) {
-  console.log('inside register in server.js');
-  console.log('req.body: ', req.body);
-  /* Firebase */
-  console.log('before firebase');
   ref.createUser(req.body, function(err, userData) {
-    console.log('error in create User is is: ', err);
-    console.log('user data', userData);
 
     if(err) return res.status(400).send(err);
 
-    console.log('firebase works!!!')
-    console.log('user data is: ', userData);
     var userObj = {};
     userObj.firebaseId = userData.uid;
     userObj.email = req.body.email;
@@ -36,10 +25,7 @@ router.post('/register', function(req, res, next) {
     userObj.image = req.body.image;
 
     User.create(userObj, function(err) {
-      console.log('err in User.create is: ', err);
       res.send(userObj);
-      //res.render('index');
-      //res.send();
     });
   });
 });
@@ -47,18 +33,9 @@ router.post('/register', function(req, res, next) {
 var authMiddleWare = require('../config/auth');
 
 router.post('/savedata', authMiddleWare, function(req, res, next) {
-  console.log('in save data in server.js');
-  console.log('user id in mongo is: ', req.user._id);
-
-  // User.findByIdUpdate(req.user._id, {$set:{user: req.user._id}}, function(err, userObj) {
   User.findById(req.user._id, function(err, userObj) {
 
     console.log('req.body: ', req.body);
-
-    //console.log('req.body.data: ', req.body.data);
-
-    //console.log('req.body.data.: ', req.body.data.gender);
-
     userObj.gender = req.body.gender;
     userObj.bio = req.body.bio;
     userObj.username = req.body.username;
@@ -67,9 +44,6 @@ router.post('/savedata', authMiddleWare, function(req, res, next) {
     userObj.hobbies = req.body.hobbies;
     userObj.favFood = req.body.favFood;
     userObj.image = req.body.image;
-
-
-    console.log('user obj in save is: ', userObj);
 
     userObj.save(function(err, savedUser){
       console.log('err in save data', err);
@@ -94,14 +68,8 @@ router.post('/login', function(req, res, next) {
 
     User.findOne({firebaseId: authData.uid}, function(err, userObj) {
       console.log('user in User.findOne is in find one AFTER is: ', userObj);
-
       var token = userObj.generateToken();
-      console.log('error in find one AFTER is: ', err);
-      console.log('user in User.findOne is in find one AFTER is: ', userObj);
-      // res.data = userObj;
-      // res.data('mytoken', token).send();
       res.cookie('mytoken', token).send(userObj);
-      // res.send({token: token})
     });
   });
 });
@@ -130,7 +98,8 @@ router.post('/creatematch', authMiddleWare, function(req, res) {
 
       Match.create(match, function(err, match) {
         console.log('match', match);
-        res.status(err ? 400 : 200).send(err || match);
+        // res.status(err ? 400 : 200).send(err || match);
+        res.status(err ? 400 : 200).send(err || 'fail');
       });
     } else {
       console.log('matches', matches);
@@ -141,6 +110,8 @@ router.post('/creatematch', authMiddleWare, function(req, res) {
           Match.update({_id: matches[i]._id}, {status: 'Accepted'}, function(err, data) {
             console.log('err-matches', err);
             console.log('data-matches', data);
+            //res.status(err ? 400 : 200).send(err || data);
+            res.status(err ? 400 : 200).send(err || 'success');
           });
           console.log('matches', matches);
         }

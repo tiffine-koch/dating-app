@@ -33,7 +33,6 @@
     </thead>
     <tr>
       <td>
-        <!-- <select ng-model="user.gender" ng-options="user in user.gender user in users" > -->
         <select ng-model="user.gender">
           <option value="female">Female</option>
           <option value="male">Male</option>
@@ -81,11 +80,11 @@
 <br>
 <button ui-sref='displayAllUsers' type="button" class="btn btn-danger">Find Geeks to Love Now</button>
 <br>
-<h1>My Matches</h1>
+<h1>You Matched With</h1>
 <table class="table">
 <thead>
   <tr>
-    <th>username</th>
+    <th>Username</th>
     <th>Bio</th>
     <th>Gender</th>
     <th>Preferences</th>
@@ -93,10 +92,23 @@
     <th>Hobbies</th>
     <th>Fav Foods</th>
     <th>Photo</th>
+    <th>Delete</th>
   </tr>
 </thead>
-
 <tbody>
-
+    <tr>
+    <!-- <tr ng-repeat="user in matchedUser"> -->
+      <td>{{matchedUser.username}}</td>
+      <td>{{matchedUser.bio}}</td>
+      <td>{{matchedUser.gender}}</td>
+      <td>{{matchedUser.preference}}</td>
+      <td>{{matchedUser.ageRange}}</td>
+      <td>{{matchedUser.hobbies}}</td>
+      <td>{{matchedUser.favFood}}</td>
+      <td>{{matchedUser.image}}</td>
+      <td>
+        <button type="button" ng-click="sendMatchRequest(user, $index)" class="btn btn-trash" value="Submit"></button>
+      </td>
+    </tr>
 </tbody>
 </table>

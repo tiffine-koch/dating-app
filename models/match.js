@@ -30,6 +30,7 @@ matchSchema.methods.reject = function(cb){
 	this.save(cb);
 }
 
+
 var Match = mongoose.model('Match', matchSchema);
 
 module.exports = Match;

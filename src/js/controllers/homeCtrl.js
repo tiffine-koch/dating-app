@@ -60,7 +60,13 @@ app.controller('profileCtrl', function($scope, $state, Users) {
     Users.saveData($scope.user).then(function(res){
     });
   };
+  var matchedUser = Users.getMatchedUser();
+  if(matchedUser){
+    $scope.matchedUser  = matchedUser;
+    console.log('$scope.MatchedUser:', $scope.matchedUser);
+  }
 });
+
 //allUsers controller
 app.controller('displayAllCtrl', function($scope, $state, Users) {
   console.log('inside displayAllCtrl');
@@ -77,17 +83,16 @@ app.controller('displayAllCtrl', function($scope, $state, Users) {
        Users.createMatch(user)
         .then(function(res) {
           console.log('inside function');
-
+          console.log('res is: ', res.data);
+          if(res.data == 'success'){
+            Users.createMatchedUser(user);
+          }
         });
-
     };
-  // $scope.saveUserData = function() {
-  //   Users.saveData($scope.user).then(function(res){
-  //   });
-  // };
 });
 
 app.service('Users', function($http) {
+  var matchedUser;
   /* TESTING */
   this.getTest = function(testString) {
     return $http.get('/');
@@ -106,7 +111,7 @@ app.service('Users', function($http) {
     return $http.get('/getdata');
   }
 
-  this.saveData = function(userObj){
+  this.saveData = function(userObj) {
     console.log('inside save data', userObj);
     return $http.post('/savedata', userObj);
   }
@@ -114,8 +119,15 @@ app.service('Users', function($http) {
     console.log('inside get data, getting all users');
     return $http.get('/getallusers');
   }
-  this.createMatch = function(userObj){
+  this.createMatch = function(userObj) {
     console.log('inside createMatch', userObj);
     return $http.post('/creatematch', userObj);
+  }
+  this.createMatchedUser = function(userObj) {
+    matchedUser = userObj;
+    return matchedUser;
+  }
+  this.getMatchedUser = function(){
+    return matchedUser;
   }
 });
