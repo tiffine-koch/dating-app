@@ -12,11 +12,13 @@
       <input type="text" ng-model="user.image" placeholder="">
     </tr>
     <br>
+    <p>Enter Your User Name Here</p>
     <tr>
       <input type="text" id="usernameInput" ng-model="user.username" placeholder={{user.data.username}}>
     </tr>
     <br>
     <tr>
+      <p>Enter Bio Here</p>
       <textarea width="600px" height="400px" type="text" id="bioInput" placeholder={{user.data.bio}} ng-model="user.bio"></textarea>
     </tr>
     <br>
@@ -92,7 +94,6 @@
     <th>Hobbies</th>
     <th>Fav Foods</th>
     <th>Photo</th>
-    <th>Delete</th>
   </tr>
 </thead>
 <tbody>
@@ -105,9 +106,6 @@
       <td>{{matchedUser.hobbies}}</td>
       <td>{{matchedUser.favFood}}</td>
       <td>{{matchedUser.image}}</td>
-      <td>
-        <button type="button" ng-click="sendMatchRequest(user, $index)" class="btn btn-trash" value="Submit"></button>
-      </td>
     </tr>
 </tbody>
 </table>
