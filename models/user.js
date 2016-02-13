@@ -14,7 +14,8 @@ var userSchema = new mongoose.Schema({
   hobbies: {type:String},
   favFood: {type:String},
   bio: {type:String},
-  imagesArray:[{type: mongoose.Schema.Types.ObjectId, ref: "Image"}]
+  image: {type:String}
+  // imagesArray:[{type: mongoose.Schema.Types.ObjectId, ref: "Image"}]
 });
 
 userSchema.methods.generateToken = function() {
