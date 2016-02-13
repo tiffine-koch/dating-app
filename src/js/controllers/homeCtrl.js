@@ -18,7 +18,7 @@ app.controller('homeCtrl', function($scope, Users) {
   console.log('homeCtrl');
 });
 
-app.controller('registerCtrl', function($scope, Users) {
+app.controller('registerCtrl', function($scope, $state, $location, Users) {
   $scope.registerUser = function(){
     if($scope.user.password !== $scope.user.passwordConfirm) {
       $scope.passwordReg = '';
@@ -26,6 +26,7 @@ app.controller('registerCtrl', function($scope, Users) {
     }
     Users.register($scope.user)
     .then(function(res){
+      $location.path('/login');
       console.log('registration succeeded');
 
     });
