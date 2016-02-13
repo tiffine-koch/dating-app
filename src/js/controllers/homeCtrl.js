@@ -63,12 +63,29 @@ app.controller('loginCtrl', function($scope, $state, $location, Users) {
 });
 app.controller('profileCtrl', function($scope, $state, Users) {
   console.log('inside profileCtrl');
+
+  // Get new info and pre-populate:
+  //Users.getUserData = function(){
+    console.log('inside get user data');
+    Users.getData().then(function(res){
+      console.log('res in get user data is: ', res.data);
+      $scope.user = res.data;
+      console.log('scope.user 1 is: ', $scope.user);
+      debugger;
+    });
+  //};
+
   $scope.saveUserData = function() {
     console.log('inside save function');
     console.log('$scope.user.username', $scope.user.username);
+    console.log('$scope.user', $scope.user);
+    debugger;
     console.log('$scope.user.bio', $scope.user.bio);
     console.log('$scope.user.gender', $scope.user.gender);
-    console.log('$scope.user', $scope.user);
+    Users.saveData($scope.user).then(function(res){
+      debugger;
+      console.log('$scope.user 2', $scope.user);
+    });
   };
   // $scope.loginUser = function(){
   //   console.log('inside login ctrl');
@@ -96,6 +113,16 @@ app.service('Users', function($http) {
   /* Login user */
   this.login = function(userObject) {
     return $http.post('/login', {email: userObject.email, password: userObject.password});
+  }
+
+  this.getData = function() {
+    console.log('inside get data');
+    return $http.get('/getdata');
+  }
+
+  this.saveData = function(userObj){
+    console.log('inside save data', userObj);
+    return $http.post('/savedata', userObj);
   }
 });
 

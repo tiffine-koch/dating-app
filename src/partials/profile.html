@@ -48,11 +48,12 @@
     </tr>
     <br>
     <tr>
-      <input type="text" id="usernameInput" ng-model="user.username" placeholder="What do they call you?">Enter Profile Name
+      <input type="text" id="usernameInput" ng-model="user.username" placeholder={{user.data.username}}>
     </tr>
     <br>
     <tr>
-      <textarea width="600px" height="400px" type="text" id="bioInput" ng-model="user.bio" placeholder="Tell us about yourself! Great bios catch great potential matches!"></textarea>
+      <!-- placeholder="Tell us about yourself! Great bios catch great potential matches!" -->
+      <textarea width="600px" height="400px" type="text" id="bioInput" placeholder={{user.data.bio}} ng-model="user.bio"></textarea>
     </tr>
     <br>
   </thead>
@@ -69,7 +70,7 @@
     <tr>
       <td>
         <!-- <select ng-model="user.gender" ng-options="user in user.gender user in users" > -->
-        <select ng-model="user.gender" >
+        <select ng-model="user.gender" placeholder={{user.data.gender}}>
           <option value="female">Female</option>
           <option value="male">Male</option>
           <option value="undisclosed">Prefer Not to Disclose</option>

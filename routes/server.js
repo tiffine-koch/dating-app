@@ -27,13 +27,13 @@ router.post('/register', function(req, res, next) {
     userObj.firebaseId = userData.uid;
     userObj.email = req.body.email;
     userObj.gender = req.body.gender;
-    // userObj.bio = req.body.bio;
-    // userObj.username = req.body.username;
-    // userObj.preference = req.body.preference;
-    // // userObj.ageRange = req.body.ageRange;
-    // userObj.hobbies = req.body.hobbies;
-    // userObj.favFood = req.body.favFood;
-    // userObj.imagesArray = req.body.imagesArray;
+    userObj.bio = req.body.bio;
+    userObj.username = req.body.username;
+    userObj.preference = req.body.preference;
+    userObj.ageRange = req.body.ageRange;
+    userObj.hobbies = req.body.hobbies;
+    userObj.favFood = req.body.favFood;
+    userObj.imagesArray = req.body.imagesArray;
 
     User.create(userObj, function(err) {
       console.log('err in User.create is: ', err);
@@ -41,6 +41,42 @@ router.post('/register', function(req, res, next) {
       //res.render('index');
       //res.send();
     });
+  });
+});
+
+var authMiddleWare = require('../config/auth');
+
+router.post('/savedata', authMiddleWare, function(req, res, next) {
+  console.log('in save data in server.js');
+  console.log('user id in mongo is: ', req.user._id);
+
+  // User.findByIdUpdate(req.user._id, {$set:{user: req.user._id}}, function(err, userObj) {
+  User.findById(req.user._id, function(err, userObj) {
+    //userObj = req.body;
+
+    // userObj = req.body;
+    console.log('req.body: ', req.body);
+
+    //console.log('req.body.data: ', req.body.data);
+
+    //console.log('req.body.data.: ', req.body.data.gender);
+
+    userObj.gender = req.body.gender;
+    userObj.bio = req.body.bio;
+    userObj.username = req.body.username;
+    userObj.preference = req.body.preference;
+    userObj.ageRange = req.body.ageRange;
+    userObj.hobbies = req.body.hobbies;
+    userObj.favFood = req.body.favFood;
+    userObj.imagesArray = req.body.imagesArray;
+
+
+    console.log('user obj in save is: ', userObj);
+
+    userObj.save(function(err, savedUser){
+      console.log('err in save data', err);
+    });
+    res.send(userObj);
   });
 });
 
@@ -70,6 +106,16 @@ router.post('/login', function(req, res, next) {
       // res.send({token: token})
     });
   });
+});
+
+router.get('/getdata', authMiddleWare, function(req, res) {
+  console.log('inside getdata of server.js');
+  User.findById(req.user._id, function(err, userObj){
+    console.log('user obj is: ', userObj);
+      res.send(userObj);
+  });
+
+
 });
 
 router.get('/', function(req, res) {
