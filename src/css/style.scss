@@ -10,18 +10,26 @@ body {
 }
 
 h1 {
-  margin-top: 400px;
+  margin-top: 75px;
   color: red;
-  font-size: 60px;
+  font-size: 30px;
   font-weight: bold;
 }
 
-p {
+td {
   color: white;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
 }
-h4 {
-  color: blue;
+
+th {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+p {
+  margin-top: 50px;
+  color: red;
+  font-size: 18px;
   font-weight: bold;
 }

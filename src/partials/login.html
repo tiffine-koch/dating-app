@@ -2,10 +2,14 @@
 <body>
   <p>Login</p>
   <form action="">
+    <div class="forn-group">
     <input ng-model='user.email' type="text" id="username" placeholder="Username">
+    </div>
     <br>
+    <div class="form-group">
     <input ng-model='user.password' type="text" id="password" placeholder="Password">
+    </div>
     <br>
-    <button ng-click="loginUser()" type="text" id="submit" value="Submit">
+    <button ng-click="loginUser()" type="text" id="submit" value="Submit" class="btn btn-success">Go to Profile</button>
   </form>
 </body>
