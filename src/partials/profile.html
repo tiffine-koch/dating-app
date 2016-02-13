@@ -1,42 +1,3 @@
-<!-- <table class="table">
-  <thead>
-    My Profile
-  <tr>
-    <td>
-      <img src="http://www.library.yorku.ca/web/bbl/wp-content/uploads/sites/8/2014/07/placeholder.png" alt="" width="300px" height="300px">
-    <br>
-      image1 image2 image3
-    </td>
-    <td>
-      <tr>
-        <br>
-        <input type="text" id="usernameInput" ng-model="user.username">username
-      </tr>
-  </thead>
-      <br>
-      <tr>
-        <textarea width="200px" height="200px" type="text" id="bioInput" ng-model="user.bio">brief bio</textarea>
-        <br>
-        <select >
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
-        </select>
-      </tr>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Dropdowns
-    </td>
-    <td>
-      Display
-      Match
-    </td>
-  </tr>
-</table> -->
-
 <table class="table">
   <thead>
     <tr>
@@ -45,6 +6,10 @@
     <br>
     <tr>
       <img src="http://www.library.yorku.ca/web/bbl/wp-content/uploads/sites/8/2014/07/placeholder.png" alt="" width="300px" height="300px">
+      <!-- <img src="/img/bluesteel.png" alt="" width="300px" height="300px"> -->
+      <!-- <img src={{user.image}} alt="" width="300px" height="300px"> -->
+      <p>Add a URL of a great photo of yourself!</p>
+      <input type="text" ng-model="user.image" placeholder="">
     </tr>
     <br>
     <tr>
@@ -52,7 +17,6 @@
     </tr>
     <br>
     <tr>
-      <!-- placeholder="Tell us about yourself! Great bios catch great potential matches!" -->
       <textarea width="600px" height="400px" type="text" id="bioInput" placeholder={{user.data.bio}} ng-model="user.bio"></textarea>
     </tr>
     <br>
@@ -70,7 +34,7 @@
     <tr>
       <td>
         <!-- <select ng-model="user.gender" ng-options="user in user.gender user in users" > -->
-        <select ng-model="user.gender" placeholder={{user.data.gender}}>
+        <select ng-model="user.gender">
           <option value="female">Female</option>
           <option value="male">Male</option>
           <option value="undisclosed">Prefer Not to Disclose</option>
@@ -114,21 +78,25 @@
   </tbody>
 
 </table>
+<br>
+<button ui-sref='displayAllUsers' type="button" class="btn btn-danger">Find Geeks to Love Now</button>
+<br>
+<h1>My Matches</h1>
+<table class="table">
+<thead>
+  <tr>
+    <th>username</th>
+    <th>Bio</th>
+    <th>Gender</th>
+    <th>Preferences</th>
+    <th>Age Range</th>
+    <th>Hobbies</th>
+    <th>Fav Foods</th>
+    <th>Photo</th>
+  </tr>
+</thead>
 
-<!--
-<form action="">
-  <input type="text" id="username" ng-model="user.gender" placeholder="Username">
-  <br>
-  <input type="text" uib-dropdown-menu id="username" ng-model="user.gender" placeholder="Username">
-  <br>
-  <input type="text" id="password" ng-model="user.username" placeholder="Password">
-  <br>
-  <input type="text" id="password-confirm" ng-model="user.ageRange" placeholder="Confirm Password">
-  <br>
-  <input type="text" id="password-confirm" ng-model="user.hobbies" placeholder="Confirm Password">
-  <br>
-  <input type="text" id="password-confirm" ng-model="user.favFood" placeholder="Confirm Password">
-  <br>
-  <button type="text" id="submit" ng-click="registerUser()" value="Submit" ui-sref="login">Create User</button>
-</form>
--->
+<tbody>
+
+</tbody>
+</table>

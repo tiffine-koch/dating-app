@@ -9,7 +9,6 @@ var User = require('../models/user');
 // TEST
 var Test = require('../models/test');
 
-
 router.post('/register', function(req, res, next) {
   console.log('inside register in server.js');
   console.log('req.body: ', req.body);
@@ -33,7 +32,7 @@ router.post('/register', function(req, res, next) {
     userObj.ageRange = req.body.ageRange;
     userObj.hobbies = req.body.hobbies;
     userObj.favFood = req.body.favFood;
-    userObj.imagesArray = req.body.imagesArray;
+    userObj.image = req.body.image;
 
     User.create(userObj, function(err) {
       console.log('err in User.create is: ', err);
@@ -52,9 +51,7 @@ router.post('/savedata', authMiddleWare, function(req, res, next) {
 
   // User.findByIdUpdate(req.user._id, {$set:{user: req.user._id}}, function(err, userObj) {
   User.findById(req.user._id, function(err, userObj) {
-    //userObj = req.body;
 
-    // userObj = req.body;
     console.log('req.body: ', req.body);
 
     //console.log('req.body.data: ', req.body.data);
@@ -68,7 +65,7 @@ router.post('/savedata', authMiddleWare, function(req, res, next) {
     userObj.ageRange = req.body.ageRange;
     userObj.hobbies = req.body.hobbies;
     userObj.favFood = req.body.favFood;
-    userObj.imagesArray = req.body.imagesArray;
+    userObj.image = req.body.image;
 
 
     console.log('user obj in save is: ', userObj);
@@ -109,13 +106,14 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/getdata', authMiddleWare, function(req, res) {
-  console.log('inside getdata of server.js');
   User.findById(req.user._id, function(err, userObj){
-    console.log('user obj is: ', userObj);
       res.send(userObj);
   });
-
-
+});
+router.get('/getallusers', authMiddleWare, function(req, res) {
+  User.find({}, function(err, usersArray){
+      res.send(usersArray);
+  });
 });
 
 router.get('/', function(req, res) {

@@ -1,0 +1,28 @@
+<h1>All Users</h1>
+<table class="table">
+<thead>
+  <tr>
+    <th>username!!!</th>
+    <th>Bio</th>
+    <th>Gender</th>
+    <th>Preferences</th>
+    <th>Age Range</th>
+    <th>Hobbies</th>
+    <th>Fav Foods</th>
+    <th>Photo</th>
+  </tr>
+</thead>
+
+<tbody>
+  <tr ng-repeat="user in usersArray" ng-if='usersArray.length'>
+    <td>{{user.username}}</td>
+    <td>{{user.bio}}</td>
+    <td>{{user.gender}}</td>
+    <td>{{user.preference}}</td>
+    <td>{{user.ageRange}}</td>
+    <td>{{user.hobbies}}</td>
+    <td>{{user.favFood}}</td>
+    <td>{{user.image}}</td>
+  </tr>
+</tbody>
+</table>

@@ -10,22 +10,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('register', { url: '/register', templateUrl: '/partials/register.html', controller: 'registerCtrl' })
     .state('login', { url: '/login', templateUrl: '/partials/login.html', controller: 'loginCtrl' })
     .state('profile', { url: '/profile', templateUrl: '/partials/profile.html', controller: 'profileCtrl' })
+    .state('displayAllUsers', { url: '/displayAllUsers', templateUrl: '/partials/displayAllUsers.html', controller: 'displayAllCtrl' })
   $urlRouterProvider.otherwise('/');
 });
 
 app.controller('homeCtrl', function($scope, Users) {
   console.log('homeCtrl');
-  /* TESTING
-  Users.getTest(testString)
-  .then(function(res) {
-    console.log('success homeCtrl');
-    // debugger;
-    // $scope.selection = res.data;
-    // Test.testString;
-  }, function(err) {
-    console.log('err:', err);
-  })
-  */
 });
 
 app.controller('registerCtrl', function($scope, Users) {
@@ -37,7 +27,6 @@ app.controller('registerCtrl', function($scope, Users) {
     Users.register($scope.user)
     .then(function(res){
       console.log('registration succeeded');
-      //window.location.href = '/partials/login.html';
 
     });
   }
@@ -63,42 +52,28 @@ app.controller('loginCtrl', function($scope, $state, $location, Users) {
 });
 app.controller('profileCtrl', function($scope, $state, Users) {
   console.log('inside profileCtrl');
-
-  // Get new info and pre-populate:
-  //Users.getUserData = function(){
-    console.log('inside get user data');
-    Users.getData().then(function(res){
-      console.log('res in get user data is: ', res.data);
-      $scope.user = res.data;
-      console.log('scope.user 1 is: ', $scope.user);
-      debugger;
-    });
-  //};
+  Users.getData().then(function(res){
+    $scope.user = res.data;
+  });
 
   $scope.saveUserData = function() {
-    console.log('inside save function');
-    console.log('$scope.user.username', $scope.user.username);
-    console.log('$scope.user', $scope.user);
-    debugger;
-    console.log('$scope.user.bio', $scope.user.bio);
-    console.log('$scope.user.gender', $scope.user.gender);
     Users.saveData($scope.user).then(function(res){
-      debugger;
-      console.log('$scope.user 2', $scope.user);
     });
   };
-  // $scope.loginUser = function(){
-  //   console.log('inside login ctrl');
-  //   Users.login($scobio
-  //   .then(function(res){
+});
+//allUsers controller
+app.controller('displayAllCtrl', function($scope, $state, Users) {
+  console.log('inside displayAllCtrl');
+  Users.getAllUsers()
+    .then(function(res){
+        console.log('res', res.data);
+        $scope.usersArray = res.data;
+  });
   //
-  //     // console.console.log('userObj', userObj);
-  //     console.log('login succeeded');
-  //     console.log(res);
-  //     $state.go('/profile');
-  //     //href to $state profile after .then
+  // $scope.saveUserData = function() {
+  //   Users.saveData($scope.user).then(function(res){
   //   });
-  // }
+  // };
 });
 
 app.service('Users', function($http) {
@@ -124,50 +99,8 @@ app.service('Users', function($http) {
     console.log('inside save data', userObj);
     return $http.post('/savedata', userObj);
   }
+  this.getAllUsers = function() {
+    console.log('inside get data, getting all users');
+    return $http.get('/getallusers');
+  }
 });
-
-
-  /*
-  Users.getTest(testString)
-  .then(function(res) {
-    console.log('success homeCtrl');
-    // debugger;
-    // $scope.selection = res.data;
-    // Test.testString;
-  }, function(err) {
-    console.log('err:', err);
-  })
-  */
-//});
-/*
-app.controller('loginCtrl', function($scope, Users) {
-  console.log('loginCtrl');
-  Users.getTest(testString)
-  .then(function(res) {
-    console.log('success homeCtrl');
-    // debugger;
-    // $scope.selection = res.data;
-    // Test.testString;
-  }, function(err) {
-    console.log('err:', err);
-  })
-});
-*/
-
-  /*
-
-
-  $.post('/users/register', {email: email, password: password, name: name})
-  .success(function(data) {
-    console.log(data);
-    location.href = '/login';
-  })
-  .fail(function(err) {
-    alert('Error.  Check console.');
-    console.log('err:', err);
-  });
-
-
-
-
-*/
