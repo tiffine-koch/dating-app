@@ -14,10 +14,12 @@
 
   <body ng-app='someApp'>
     <h1>Geeks IN LOVE</h1>
-      <button ui-sref='home' class="btn btn-danger">Home</button>
-      <button ui-sref='register' class="btn btn-warning">Registration</button>
-      <button ui-sref='login' class="btn btn-danger">Login</button>
-      <button ui-sref='home' class="btn btn-warning">Logout</button>
+      <div ng-controller='navCtrl'>
+        <button ui-sref='home' class="btn btn-danger">Home</button>
+        <button ui-sref='register' class="btn btn-warning">Registration</button>
+        <button ui-sref='login' class="btn btn-danger">Login</button>
+        <button ng-click='logout()' class="btn btn-warning">Logout</button>        
+      </div>
       <div class="container">
         <ui-view></ui-view>
       </div>

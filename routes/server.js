@@ -52,6 +52,9 @@ router.post('/savedata', authMiddleWare, function(req, res, next) {
   });
 });
 
+router.post('/logout', function(req, res) {
+  res.clearCookie('mytoken').send();
+});
 
 router.post('/login', function(req, res, next) {
   console.log('inside login in server.js');

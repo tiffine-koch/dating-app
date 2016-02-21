@@ -48,6 +48,10 @@ gulp.task('js', ['clean-js'], function() {
     .pipe(gulp.dest('./public/js'));
 });
 
+// gulp.task('images', function() {
+//
+// })
+
 gulp.task('css', ['clean-css'], function() {
   return gulp.src(config.paths.sass)
     .pipe(sass())

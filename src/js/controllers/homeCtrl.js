@@ -1,18 +1,9 @@
 'use strict';
 
-var app = angular.module('someApp', ['ui.router']);
-console.log('working');
+var app = angular.module('someApp');
 
 var testString = 'hey';
-app.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-    .state('home', { url: '/', templateUrl: '/partials/home/home.html', controller: 'homeCtrl' })
-    .state('register', { url: '/register', templateUrl: '/partials/register.html', controller: 'registerCtrl' })
-    .state('login', { url: '/login', templateUrl: '/partials/login.html', controller: 'loginCtrl' })
-    .state('profile', { url: '/profile', templateUrl: '/partials/profile.html', controller: 'profileCtrl' })
-    .state('displayAllUsers', { url: '/displayAllUsers', templateUrl: '/partials/displayAllUsers.html', controller: 'displayAllCtrl' })
-  $urlRouterProvider.otherwise('/');
-});
+
 
 app.controller('homeCtrl', function($scope, Users) {
   console.log('homeCtrl');
@@ -26,7 +17,7 @@ app.controller('registerCtrl', function($scope, $state, $location, Users) {
     }
     Users.register($scope.user)
     .then(function(res){
-      $location.path('/login');
+      $state.go('login');
       console.log('registration succeeded');
 
     });
@@ -105,6 +96,10 @@ app.service('Users', function($http) {
   /* Login user */
   this.login = function(userObject) {
     return $http.post('/login', {email: userObject.email, password: userObject.password});
+  }
+
+  this.logout = function() {
+    return $http.post('/logout');
   }
 
   this.getData = function() {
